@@ -22,5 +22,32 @@ The EEPRS pipeline involves five main steps (Figure 1):
   <img src="https://github.com/user-attachments/files/20981292/Figure1.pdf" alt="EEPRS Workflow"/>
 </p>
 
+## Getting Started
+In this section, we provide detailed, step-by-step instructions for implementing EEPRS. Please replace all placeholders with the appropriate paths and filenames specific to your computing environment.
+
+### Step 1: Generate EHR-based phenotype embeddings
+This step involves constructing phenotype embeddings from EHR data using ICD-10 codes. The procedure includes:
+
+* **Data preprocessing:** Extract individual longitudinal ICD-10 code sequences from EHR data, ordered by hospital admission dates. Treat these sequences as "sentences," with ICD-10 codes as tokens.
+
+* **ICD-10 code embedding:** Generate dense vector representations for ICD-10 codes using two approaches:
+
+  * **Word2Vec-based:** Train embeddings from clinical descriptions using the CBOW Word2Vec model.
+  * **GPT-based:** Use GPT-generated plain-language descriptions, embedding them with GPT models.
+
+* **Individual embedding:** Compute individual-level embeddings by averaging ICD-10 code embeddings across each person's clinical record.
+
+* **Dimension reduction:** Apply PCA or ICA dimensionality reduction techniques to individual embeddings, retaining components explaining at least 80% of the variance, creating compact representations (Word2Vec\_PCA, Word2Vec\_ICA, GPT\_PCA, GPT\_ICA).
+
+Detailed code implementation is available in \[repository link placeholder].
+
+#### Step 2: Perform EHR embedding-based GWAS
+
+#### Step 3: Derive EHR embedding-based PRS
+
+#### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
+
+#### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
+
 ## Support
 Please direct any problems or questions to Leqi Xu ([leqi.xu@yale.edu](mailto:leqi.xu@yale.edu)).
