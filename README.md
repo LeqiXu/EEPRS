@@ -41,13 +41,14 @@ This step involves constructing phenotype embeddings from EHR data using ICD-10 
 
 Detailed code implementation is available in \[repository link placeholder].
 
-#### Step 2: Perform EHR embedding-based GWAS
+### Step 2: Perform EHR embedding-based GWAS
+Before GWAS, quantile normalization is applied separately to each embedding dimension to approximate normality. Each normalized embedding dimension is then analyzed individually as a quantitative phenotype in marginal linear regression models across all HapMap3 SNPs (S = 1,297,431). Covariates such as age, sex, and the top 20 genetic principal components (PCs) are included to control for confounding effects. GWAS analyses are performed using [https://www.cog-genomics.org/plink/2.0/](PLINK2).
 
-#### Step 3: Derive EHR embedding-based PRS
+### Step 3: Derive EHR embedding-based PRS
 
-#### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
+### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
 
-#### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
+### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
 
 ## Support
 Please direct any problems or questions to Leqi Xu ([leqi.xu@yale.edu](mailto:leqi.xu@yale.edu)).
