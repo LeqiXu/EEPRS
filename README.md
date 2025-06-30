@@ -66,10 +66,10 @@ Detailed code implementation is available in \[repository link placeholder].
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
 
 * **Step 1: EHR embedding selection**
-  We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using LDSC \cite{bulik2015atlas}. Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
+  We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using [LDSC](https://github.com/bulik/ldsc). Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
 
 * **Step 2: Target trait GWAS subsampling**
-  GWAS summary statistics for the target trait are split into statistically independent training and tuning GWAS using the GWAS subsampling procedure from MIXPRS. LD pruning (pairwise \$r^2 < 0.5\$ within 250 kb windows) is applied to mitigate LD mismatch and reduce computational burden in downstream analysis.
+  We generate statistically independent training and tuning GWAS using the Step1 GWAS subsampling in [MIXPRS](https://github.com/LeqiXu/MIXPRS) based on the target trait GWAS summary statistics.
 
 * **Step 3: Estimating PRS combination weights**
   This step consists of two sub-steps:
