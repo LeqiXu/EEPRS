@@ -22,6 +22,8 @@ The EEPRS pipeline involves five main steps (Figure 1):
   <img src="https://github.com/user-attachments/files/20981292/Figure1.pdf" alt="EEPRS Workflow"/>
 </p>
 
+For full details of codes, see the [EEPRS_analysis repository](https://github.com/LeqiXu/EEPRS_analysis).
+
 ## Getting Started
 In this section, we provide detailed, step-by-step instructions for implementing EEPRS. Please replace all placeholders with the appropriate paths and filenames specific to your computing environment.
 
@@ -62,6 +64,24 @@ Detailed code implementation is available in \[repository link placeholder].
 
 ### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
+
+* **Step 1: EHR embedding selection**
+  We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using LDSC \cite{bulik2015atlas}. Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
+
+* **Step 2: Target trait GWAS subsampling**
+  GWAS summary statistics for the target trait are split into statistically independent training and tuning GWAS using the GWAS subsampling procedure from MIXPRS. LD pruning (pairwise \$r^2 < 0.5\$ within 250 kb windows) is applied to mitigate LD mismatch and reduce computational burden in downstream analysis.
+
+* **Step 3: Estimating PRS combination weights**
+  This step consists of two sub-steps:
+
+  * **Step 3.1: PRS coefficient estimation:**
+    PRS-CS-auto is applied independently to the subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
+
+  * **Step 3.2: Combination weight determination:**
+    In contrast to the non-negative least squares approach used in MIXPRS, we employ linear regression to estimate optimal combination weights. This allows for negative weights, accommodating embeddings that may be negatively associated with the target trait. Only embeddings selected in Step 1 are included to ensure robustness. Final weights are estimated using the subsampled tuning GWAS summary statistics and the calculated LD-pruned PRS beta coefficients.
+
+* **Step 4: Derivation of EEPRS**
+  Complete GWAS summary statistics for the target trait and selected embeddings are re-analyzed using PRS-CS-auto to generate final PRS beta coefficients. These beta coefficients are then integrated using the weights from Step 3 to derive the final EEPRS. This integrated score captures complementary genetic signals, enhancing predictive accuracy across a range of complex traits.
 
 <p align="center">
   <img src="https://github.com/user-attachments/files/20983094/FigureS1.pdf" alt="EEPRS-Integrator"/>
