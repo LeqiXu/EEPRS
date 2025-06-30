@@ -49,10 +49,25 @@ Detailed code implementation is available in \[repository link placeholder].
 Calculated GWAS using UK Biobank training data (N = 207,734) is available in \[repository link placeholder].
 
 ### Step 3: Derive EHR embedding-based PRS
+This step computes PRS using EHR embedding-based GWAS summary statistics generated from Step 2. We recommend using PRS methods that require only GWAS summary statistics for convenience. Detailed implementations of these component methods are available in their respective repositories:
+
+* [PRS-CS-auto](https://github.com/getian107/PRScs)
+* [SDPR](https://github.com/eldronzhou/SDPRX)
+* [SBayesRC](https://github.com/zhilizheng/SBayesRC)
 
 ### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
+This step interprets the EHR embedding-based PRS using a PRS-based PheWAS framework, assessing associations between each embedding-based PRS (predictor) and ICD-10 code-derived phenotypes (outcomes) using the [PheWAS R package](https://github.com/PheWAS/PheWAS). For each PRS–phenotype pair, we perform logistic regression adjusted for age, sex, and the top 20 genetic PCs to account for population stratification and potential confounders. To correct for multiple testing, we apply the BH procedure to control the FDR.
+
+Detailed code implementation is available in \[repository link placeholder].
 
 ### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
+This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
+
+<p align="center">
+  <img src="https://github.com/user-attachments/files/20983094/FigureS1.pdf" alt="EEPRS-Integrator"/>
+</p>
+
+[MIXPRS](https://github.com/LeqiXu/MIXPRS)
 
 ## Support
 Please direct any problems or questions to Leqi Xu ([leqi.xu@yale.edu](mailto:leqi.xu@yale.edu)).
