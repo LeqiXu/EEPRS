@@ -71,7 +71,7 @@ Instructions and phecode data can be found at [Phecode resource](https://wei-lab
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
 
 * **Step 1: EHR embedding selection**  
-  We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using [LDSC](https://github.com/bulik/ldsc). Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
+  We select embedding GWASs that are genetically correlated with the target trait, as assessed using [LDSC](https://github.com/bulik/ldsc). Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
 
   Detailed implementation code is available in [LDSC corr](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
