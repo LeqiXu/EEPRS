@@ -53,16 +53,16 @@ Calculated GWAS using UK Biobank training data (N = 207,734) is available in [We
 ### Step 3: Derive EHR embedding-based PRS
 This step computes PRS using EHR embedding-based GWAS summary statistics generated from Step 2. We recommend using PRS methods that require only GWAS summary statistics and LD reference panels for convenience. Detailed implementations of these component methods are available in their respective repositories:
 
-* [PRS-CS-auto](https://github.com/getian107/PRScs)
-* [SDPR](https://github.com/eldronzhou/SDPR)
-* [SBayesRC](https://github.com/zhilizheng/SBayesRC)
+* [PRS-CS-auto](https://github.com/getian107/PRScs).
+* [SDPR](https://github.com/eldronzhou/SDPR).
+* [SBayesRC](https://github.com/zhilizheng/SBayesRC).
 
 ### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
 This step interprets the EHR embedding-based PRS using a PRS-based PheWAS framework, assessing associations between each embedding-based PRS (predictor) and ICD-10 code-derived phenotypes (outcomes) using the [PheWAS R package](https://github.com/PheWAS/PheWAS). For each PRS–phenotype pair, we perform logistic regression adjusted for age, sex, and the top 20 genetic PCs to account for population stratification and potential confounders. To correct for multiple testing, we apply the BH procedure to control the FDR.
 
 Detailed implementation code is available in [PheWAS_analyze](https://github.com/LeqiXu/EEPRS_analysis/tree/main/5.%20PheWAS_analyze).
 
-Instructions and phecode data can be found at [Phecode resource](https://wei-lab.app.vumc.org/phecode)
+Instructions and phecode data can be found at [Phecode resource](https://wei-lab.app.vumc.org/phecode).
 
 ### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
@@ -75,7 +75,7 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
 * **Step 2: Target trait GWAS subsampling**  
   We generate statistically independent training and tuning GWAS using the Step1 GWAS subsampling in [MIXPRS](https://github.com/LeqiXu/MIXPRS) based on the target trait GWAS summary statistics.
 
-  Detailed implementation code is available in [Trait GWAS subsample](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/2.2%20Trait_GWAS_subsample)
+  Detailed implementation code is available in [Trait GWAS subsample](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/2.2%20Trait_GWAS_subsample).
 
 * **Step 3: Estimating PRS combination weights**  
   This step consists of two sub-steps:
@@ -84,7 +84,7 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
     We calculate the PRS for subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
 
     * **Calculate PRS with subsampled training GWAS for target trait:**
-      [Trait subsample PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh)
+      [Trait subsample PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh).
     * **Perform LD pruning for embedding GWAS:**  
       ```bash
       library(data.table)
@@ -116,7 +116,7 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
       rs9442372	  G	  A	  0.00690567	  2.66e-05
       ...
       ```
-      * Prune snplist can be downloaded in [MIXPRS snplist](https://github.com/LeqiXu/MIXPRS/tree/main/snplist)
+      * Prune snplist can be downloaded in [MIXPRS snplist](https://github.com/LeqiXu/MIXPRS/tree/main/snplist).
         
     * **Calculate LD-pruned PRS for embeddings:**
       [Word2Vec LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.1%20Word2Vec_prune.sh); [Word2Vec_PCA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.2%20Word2Vec_PCA_prune.sh); [Word2Vec_ICA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.3%20Word2Vec_ICA_prune.sh); [GPT_PCA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.5%20GPT_PCA_prune.sh); [GPT_ICA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.6%20GPT_ICA_prune.sh). 
