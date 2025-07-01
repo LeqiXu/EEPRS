@@ -41,12 +41,12 @@ This step involves constructing phenotype embeddings from EHR data using ICD-10 
 
 * **Dimension reduction:** Apply PCA or ICA dimensionality reduction techniques to individual embeddings, retaining components explaining at least 80% of the variance, creating compact representations (Word2Vec\_PCA, Word2Vec\_ICA, GPT\_PCA, GPT\_ICA).
 
-Detailed code implementation is available in [Phenotype embedding] and [Dimension reduction](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
+Detailed implementation code is available in [Phenotype embedding] and [Dimension reduction](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
 ### Step 2: Perform EHR embedding-based GWAS
 This step involves applying quantile normalization separately to each embedding dimension to approximate normality. Each normalized embedding dimension is then analyzed individually as a quantitative phenotype in marginal linear regression models across all HapMap3 SNPs (S = 1,297,431). Covariates such as age, sex, and the top 20 genetic PCs are included to control for confounding effects. GWAS analyses are performed using [PLINK2](https://www.cog-genomics.org/plink/2.0/).
 
-Detailed code implementation is available in [Embedding_GWAS](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
+Detailed implementation code is available in [Embedding_GWAS](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
 Calculated GWAS using UK Biobank training data (N = 207,734) is available in [We will publicly release our data upon publication].
 
@@ -60,7 +60,7 @@ This step computes PRS using EHR embedding-based GWAS summary statistics generat
 ### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
 This step interprets the EHR embedding-based PRS using a PRS-based PheWAS framework, assessing associations between each embedding-based PRS (predictor) and ICD-10 code-derived phenotypes (outcomes) using the [PheWAS R package](https://github.com/PheWAS/PheWAS). For each PRS–phenotype pair, we perform logistic regression adjusted for age, sex, and the top 20 genetic PCs to account for population stratification and potential confounders. To correct for multiple testing, we apply the BH procedure to control the FDR.
 
-Detailed code implementation is available in [PheWAS_analyze](https://github.com/LeqiXu/EEPRS_analysis/tree/main/5.%20PheWAS_analyze).
+Detailed implementation code is available in [PheWAS_analyze](https://github.com/LeqiXu/EEPRS_analysis/tree/main/5.%20PheWAS_analyze).
 
 Instructions and phecode data can be found at [Phecode resource](https://wei-lab.app.vumc.org/phecode)
 
@@ -70,14 +70,43 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
 * **Step 1: EHR embedding selection**
   We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using [LDSC](https://github.com/bulik/ldsc). Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
 
+  Detailed implementation code is available in [LDSC corr](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
+
 * **Step 2: Target trait GWAS subsampling**
   We generate statistically independent training and tuning GWAS using the Step1 GWAS subsampling in [MIXPRS](https://github.com/LeqiXu/MIXPRS) based on the target trait GWAS summary statistics.
+
+  Detailed implementation code is available in [Trait GWAS subsample](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/2.2%20Trait_GWAS_subsample)
 
 * **Step 3: Estimating PRS combination weights**
   This step consists of two sub-steps:
 
   * **Step 3.1: PRS coefficient estimation:**
-    PRS-CS-auto is applied independently to the subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
+    We calculate the PRS for subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
+
+    * **Calculate PRS with subsampled training GWAS for target trait:**
+      (Trait subsample PRS)[https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh]
+    * **Perform LD pruning for embedding GWAS:**
+      `library(data.table)
+
+      pop = "EUR"
+      train_type = "train"
+
+      for (i in c(1:100)){
+        # PRScsx for full snplist
+        PRScsx_clean = fread(paste0("/gpfs/gibbs/pi/zhao/lx94/EEPRS/data/embedding_data/PRScsx/word2vec100_",train_type,"_EUR_UKB_Embedding",i,"_PRScsx.txt"))
+
+        # Prune snplist
+        prune_snplist = fread(paste0("/gpfs/gibbs/pi/zhao/lx94/SWIFT/data/prune_clump/snplist/",pop,"_prune_pval1_r20.5_wc250_1.snplist"), header = FALSE)
+
+        # PRScsx for prune snplist
+        PRScsx_clean_prune_snplist = PRScsx_clean[which(PRScsx_clean$SNP %in% prune_snplist$V1),]
+
+        write.table(PRScsx_clean_prune_snplist, file=paste0("/gpfs/gibbs/pi/zhao/lx94/EEPRS/data/embedding_data/PRScsx/word2vec100_",train_type,"_EUR_UKB_Embedding",i,"_prune_",pop,"_PRScsx.txt"), 
+                row.names=F, col.names=T, quote=F, append=F, sep = "\t")
+
+      }`
+    * **Calculate LD-pruned PRS for embeddings:**
+      `[path/to/LD_pruned_PRS/embeddings/]`
 
   * **Step 3.2: Combination weight determination:**
     In contrast to the non-negative least squares approach used in MIXPRS, we employ linear regression to estimate optimal combination weights. This allows for negative weights, accommodating embeddings that may be negatively associated with the target trait. Only embeddings selected in Step 1 are included to ensure robustness. Final weights are estimated using the subsampled tuning GWAS summary statistics and the calculated LD-pruned PRS beta coefficients.
