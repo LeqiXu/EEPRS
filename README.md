@@ -54,7 +54,7 @@ Detailed implementation code is available in [Embedding_GWAS](https://github.com
 Calculated GWAS using UK Biobank training data (N = 207,734) is available in [We will publicly release our data upon publication].
 
 ### Step 3: Derive EHR embedding-based PRS
-This step computes PRS using EHR embedding-based GWAS summary statistics generated from Step 2. We recommend using PRS methods that require only GWAS summary statistics and LD reference panels for convenience. Detailed implementations of these component methods are available in their respective repositories:
+This step computes PRS using EHR embedding-based GWAS summary statistics generated from Step 2. We recommend using PRS methods that require only GWAS summary statistics and LD reference panels for convenience. Detailed implementations of these methods are available in their respective repositories:
 
 * [PRS-CS-auto](https://github.com/getian107/PRScs).
 * [SDPR](https://github.com/eldronzhou/SDPR).
