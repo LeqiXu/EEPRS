@@ -60,7 +60,9 @@ This step computes PRS using EHR embedding-based GWAS summary statistics generat
 ### Step 4: Interpret EHR embedding-based PRS in a PRS-based PheWAS framework
 This step interprets the EHR embedding-based PRS using a PRS-based PheWAS framework, assessing associations between each embedding-based PRS (predictor) and ICD-10 code-derived phenotypes (outcomes) using the [PheWAS R package](https://github.com/PheWAS/PheWAS). For each PRS–phenotype pair, we perform logistic regression adjusted for age, sex, and the top 20 genetic PCs to account for population stratification and potential confounders. To correct for multiple testing, we apply the BH procedure to control the FDR.
 
-Detailed code implementation is available in \[repository link placeholder].
+Detailed code implementation is available in [PheWAS_analyze](https://github.com/LeqiXu/EEPRS_analysis/tree/main/5.%20PheWAS_analyze).
+
+Instructions and phecode data can be found at [Phecode resource](https://wei-lab.app.vumc.org/phecode)
 
 ### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
