@@ -107,6 +107,17 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
 
       }
       ```
+      Here,
+      * PRScsx format GWAS is the embedding GWAS with the following format:
+      ```
+      SNP               A1      A2      BETA            P
+      rs3934834	  C	  T	  0.0063086	  0.00512
+      rs3766192	  T	  C	  0.00761278	  5.14e-06
+      rs9442372	  G	  A	  0.00690567	  2.66e-05
+      ...
+      ```
+      * Prune snplist can be downloaded in [MIXPRS snplist](https://github.com/LeqiXu/MIXPRS/tree/main/snplist)
+        
     * **Calculate LD-pruned PRS for embeddings:**
       `[path/to/LD_pruned_PRS/embeddings/]`
 
