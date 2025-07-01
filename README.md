@@ -1,5 +1,5 @@
 # EEPRS
-EEPRS is a phenotype embedding-based PRS interpretation and integration framework designed to effectively combine high-dimensional EHR data with traditional PRS.
+Electronic Health Record Embedding integrated Polygenic Risk Score (EEPRS) is a phenotype embedding-based PRS interpretation and integration framework designed to effectively combine high-dimensional EHR data with traditional PRS.
 
 This framework extends the multi-population PRS integration method MIXPRS:
 - **Xu, L., Dong, Y., Zeng, X., Bian, Z., Zhou, G., Guan, L., & Zhao, H. (2025). Almost Free Enhancement of Multi-Population PRS: From Data-Fission to Pseudo-GWAS Subsampling. bioRxiv, 2025-06.**
