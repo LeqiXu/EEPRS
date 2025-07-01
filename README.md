@@ -119,7 +119,7 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
       * Prune snplist can be downloaded in [MIXPRS snplist](https://github.com/LeqiXu/MIXPRS/tree/main/snplist)
         
     * **Calculate LD-pruned PRS for embeddings:**
-      `[path/to/LD_pruned_PRS/embeddings/]`
+      [Word2Vec LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.1%20Word2Vec_prune.sh); [Word2Vec_PCA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.2%20Word2Vec_PCA_prune.sh); [Word2Vec_ICA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.3%20Word2Vec_ICA_prune.sh); [GPT_PCA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.5%20GPT_PCA_prune.sh); [GPT_ICA LD-pruned PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/1.%20EEPRS_calculate/2.6%20GPT_ICA_prune.sh). 
 
   * **Step 3.2: Combination weight determination:**
     In contrast to the non-negative least squares approach used in MIXPRS, we employ linear regression to estimate optimal combination weights. This allows for negative weights, accommodating embeddings that may be negatively associated with the target trait. Only embeddings selected in Step 1 are included to ensure robustness. Final weights are estimated using the subsampled tuning GWAS summary statistics and the calculated LD-pruned PRS beta coefficients.
