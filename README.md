@@ -67,25 +67,25 @@ Instructions and phecode data can be found at [Phecode resource](https://wei-lab
 ### Step 5: Integrate EHR embedding-informed PRS via EEPRS-Integrator in the EEPRS framework
 This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-Integrator that requires only GWAS summary statistics. The EEPRS-Integrator pipeline involves four main steps (Figure 2):
 
-* **Step 1: EHR embedding selection**
+* **Step 1: EHR embedding selection**  
   We identify embedding GWAS results that are genetically correlated with the target trait, as assessed using [LDSC](https://github.com/bulik/ldsc). Only embeddings showing statistically significant genetic correlation are selected for subsequent integration.
 
   Detailed implementation code is available in [LDSC corr](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
-* **Step 2: Target trait GWAS subsampling**
+* **Step 2: Target trait GWAS subsampling**  
   We generate statistically independent training and tuning GWAS using the Step1 GWAS subsampling in [MIXPRS](https://github.com/LeqiXu/MIXPRS) based on the target trait GWAS summary statistics.
 
   Detailed implementation code is available in [Trait GWAS subsample](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/2.2%20Trait_GWAS_subsample)
 
-* **Step 3: Estimating PRS combination weights**
+* **Step 3: Estimating PRS combination weights**  
   This step consists of two sub-steps:
 
-  * **Step 3.1: PRS coefficient estimation:**
+  * **Step 3.1: PRS coefficient estimation:**  
     We calculate the PRS for subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
 
-    * **Calculate PRS with subsampled training GWAS for target trait:**
+    * **Calculate PRS with subsampled training GWAS for target trait:**  
       (Trait subsample PRS)[https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh]
-    * **Perform LD pruning for embedding GWAS:**
+    * **Perform LD pruning for embedding GWAS:**  
       ```bash
       library(data.table)
 
