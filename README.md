@@ -93,13 +93,13 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
       train_type = "train"
 
       for (i in c(1:100)){
-        # PRScsx for full snplist
+        # PRScsx format GWAS for full snplist
         PRScsx_clean = fread(paste0("/gpfs/gibbs/pi/zhao/lx94/EEPRS/data/embedding_data/PRScsx/word2vec100_",train_type,"_EUR_UKB_Embedding",i,"_PRScsx.txt"))
 
         # Prune snplist
         prune_snplist = fread(paste0("/gpfs/gibbs/pi/zhao/lx94/SWIFT/data/prune_clump/snplist/",pop,"_prune_pval1_r20.5_wc250_1.snplist"), header = FALSE)
 
-        # PRScsx for prune snplist
+        # PRScsx format GWAS for prune snplist
         PRScsx_clean_prune_snplist = PRScsx_clean[which(PRScsx_clean$SNP %in% prune_snplist$V1),]
 
         write.table(PRScsx_clean_prune_snplist, file=paste0("/gpfs/gibbs/pi/zhao/lx94/EEPRS/data/embedding_data/PRScsx/word2vec100_",train_type,"_EUR_UKB_Embedding",i,"_prune_",pop,"_PRScsx.txt"), 
