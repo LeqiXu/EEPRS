@@ -83,7 +83,7 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
   * **Step 3.1: PRS coefficient estimation:**  
     We calculate the PRS for subsampled training GWAS summary statistics for the target trait and each selected embedding GWAS (after additional LD pruning), generating LD-pruned PRS beta coefficients.
 
-    * **Calculate PRS with subsampled training GWAS for target trait:**  
+    * **Calculate PRS with subsampled training GWAS for target trait:**
       [Trait subsample PRS](https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh)
     * **Perform LD pruning for embedding GWAS:**  
       ```bash
