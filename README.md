@@ -124,14 +124,16 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
   * **Step 3.2: Combination weight determination:**
     In contrast to the non-negative least squares approach used in MIXPRS, we employ linear regression to estimate optimal combination weights. This allows for negative weights, accommodating embeddings that may be negatively associated with the target trait. Only embeddings selected in Step 1 are included to ensure robustness. Final weights are estimated using the subsampled tuning GWAS summary statistics and the calculated LD-pruned PRS beta coefficients.
 
+    Detailed implementation code is available in [PRS combine](https://github.com/LeqiXu/EEPRS_analysis/tree/main/2.%20Method_calculate/3.%20PRS_combine).
+
 * **Step 4: Derivation of EEPRS**
-  Complete GWAS summary statistics for the target trait and selected embeddings are re-analyzed using PRS-CS-auto to generate final PRS beta coefficients. These beta coefficients are then integrated using the weights from Step 3 to derive the final EEPRS. This integrated score captures complementary genetic signals, enhancing predictive accuracy across a range of complex traits.
+  Complete GWAS summary statistics for the target trait and selected embeddings are re-analyzed to generate final PRS beta coefficients. These beta coefficients are then integrated using the weights from Step 3 to derive the final EEPRS. This integrated score captures complementary genetic signals, enhancing predictive accuracy across a range of complex traits.
+
+  Detailed implementation code is available in [PRS combine](https://github.com/LeqiXu/EEPRS_analysis/tree/main/2.%20Method_calculate/3.%20PRS_combine).
 
 <p align="center">
   <img src="https://github.com/user-attachments/files/20983094/FigureS1.pdf" alt="EEPRS-Integrator"/>
 </p>
-
-[MIXPRS](https://github.com/LeqiXu/MIXPRS)
 
 ## Support
 Please direct any problems or questions to Leqi Xu ([leqi.xu@yale.edu](mailto:leqi.xu@yale.edu)).
