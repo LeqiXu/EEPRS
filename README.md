@@ -86,7 +86,8 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
     * **Calculate PRS with subsampled training GWAS for target trait:**
       (Trait subsample PRS)[https://github.com/LeqiXu/EEPRS_analysis/blob/main/2.%20Method_calculate/2.%20TraitPRS_calculate/1.2%20Trait.subsample.PRS.beta.sh]
     * **Perform LD pruning for embedding GWAS:**
-      `library(data.table)
+      ```bash
+      library(data.table)
 
       pop = "EUR"
       train_type = "train"
@@ -104,7 +105,8 @@ This step integrates EHR embedding-based PRS with trait-specific PRS via EEPRS-I
         write.table(PRScsx_clean_prune_snplist, file=paste0("/gpfs/gibbs/pi/zhao/lx94/EEPRS/data/embedding_data/PRScsx/word2vec100_",train_type,"_EUR_UKB_Embedding",i,"_prune_",pop,"_PRScsx.txt"), 
                 row.names=F, col.names=T, quote=F, append=F, sep = "\t")
 
-      }`
+      }
+      ```
     * **Calculate LD-pruned PRS for embeddings:**
       `[path/to/LD_pruned_PRS/embeddings/]`
 
