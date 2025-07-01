@@ -46,7 +46,7 @@ Detailed code implementation is available in \[repository link placeholder].
 ### Step 2: Perform EHR embedding-based GWAS
 This step involves applying quantile normalization separately to each embedding dimension to approximate normality. Each normalized embedding dimension is then analyzed individually as a quantitative phenotype in marginal linear regression models across all HapMap3 SNPs (S = 1,297,431). Covariates such as age, sex, and the top 20 genetic PCs are included to control for confounding effects. GWAS analyses are performed using [PLINK2](https://www.cog-genomics.org/plink/2.0/).
 
-Detailed code implementation is available in \[repository link placeholder].
+Detailed code implementation is available in [Embedding_GWAS](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
 Calculated GWAS using UK Biobank training data (N = 207,734) is available in \[repository link placeholder].
 
