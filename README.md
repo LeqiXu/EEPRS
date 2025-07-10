@@ -44,7 +44,7 @@ This step involves constructing phenotype embeddings from EHR data using ICD-10 
 
 * **Dimension reduction:** Apply PCA or ICA dimensionality reduction techniques to individual embeddings, retaining components explaining at least 80% of the variance, creating compact representations (Word2Vec\_PCA, Word2Vec\_ICA, GPT\_PCA, GPT\_ICA).
 
-Detailed implementation code is available in [Phenotype embedding] and [Dimension reduction](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
+Detailed implementation code is available in [Phenotype embedding](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.1%20Embedding_derive) and [Dimension reduction](https://github.com/LeqiXu/EEPRS_analysis/tree/main/1.%20Data_prepare/1.2%20Embedding_GWAS).
 
 ### Step 2: Perform EHR embedding-based GWAS
 This step involves applying quantile normalization separately to each embedding dimension to approximate normality. Each normalized embedding dimension is then analyzed individually as a quantitative phenotype in marginal linear regression models across all HapMap3 SNPs (S = 1,297,431). Covariates such as age, sex, and the top 20 genetic PCs are included to control for confounding effects. GWAS analyses are performed using [PLINK2](https://www.cog-genomics.org/plink/2.0/).
