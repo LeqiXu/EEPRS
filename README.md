@@ -38,7 +38,7 @@ This step involves constructing phenotype embeddings from EHR data using ICD-10 
 * **ICD-10 code embedding:** Generate dense vector representations for ICD-10 codes using two approaches:
 
   * **Word2Vec-based:** Train embeddings from clinical descriptions using the CBOW Word2Vec model.
-  * **GPT-based:** Use GPT-generated plain-language descriptions, embedding them with GPT models.
+  * **GPT-based:** Use GPT-o1-generated plain-language descriptions, embedding them using the text-embedding-3-large model.
 
 * **Individual embedding:** Compute individual-level embeddings by averaging ICD-10 code embeddings across each person's clinical record.
 
